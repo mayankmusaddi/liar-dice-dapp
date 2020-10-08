@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import ReadString from "./ReadString";
+// import ReadString from "./ReadString";
 import SetString from "./SetString";
 import GameInformation from './GameInformation';
 
