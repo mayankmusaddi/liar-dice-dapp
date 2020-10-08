@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import ReadString from "./ReadString";
 import SetString from "./SetString";
+import GameInformation from './GameInformation';
 
 
 class App extends React.Component {
@@ -28,7 +29,7 @@ class App extends React.Component {
     if (this.state.loading) return "Loading Drizzle...";
     return (
       <div className="App">
-        <ReadString
+        <GameInformation
           drizzle={this.props.drizzle}
           drizzleState={this.state.drizzleState}
         />

@@ -73,15 +73,15 @@
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.5.16+commit.9c3226ce\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":true,\"inputs\":[],\"name\":\"face\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"pid\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"quantity\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"f\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"q\",\"type\":\"uint256\"}],\"name\":\"setBid\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"success\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/home/sankalp/courses/bc/liar-dice-dapp/contracts/LiarsDice.sol\":\"Bid\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/sankalp/courses/bc/liar-dice-dapp/contracts/LiarsDice.sol\":{\"keccak256\":\"0x322f7c16704c0d8af45331ce9930669586a2807f6b5c92b0e1ba32e9ffb4e0ec\",\"urls\":[\"bzz-raw://5bf0757469ab796c6f37884579a845fe6d3523180a305a4edf7e185ae0955efa\",\"dweb:/ipfs/QmaSiwc79kZKrT49sv6Z5iWB4xnUAWzVcU7MA5MzeSpi6e\"]}},\"version\":1}",
-  "bytecode": "0x608060405234801561001057600080fd5b506101e9806100206000396000f3fe608060405234801561001057600080fd5b506004361061004c5760003560e01c806317fc45e2146100515780631c582cf71461006f578063711283d11461008d578063f1068454146100dd575b600080fd5b610059610127565b6040518082815260200191505060405180910390f35b61007761012d565b6040518082815260200191505060405180910390f35b6100c3600480360360408110156100a357600080fd5b810190808035906020019092919080359060200190929190505050610133565b604051808215151515815260200191505060405180910390f35b6100e561018e565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b60015481565b60005481565b6000826000819055508160018190555033600260006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055506001905092915050565b600260009054906101000a900473ffffffffffffffffffffffffffffffffffffffff168156fea265627a7a72315820ecebf28ae92adcc8e0c6384f054c890af8d07edf4fa719747c8e9ab514b5126664736f6c63430005100032",
-  "deployedBytecode": "0x608060405234801561001057600080fd5b506004361061004c5760003560e01c806317fc45e2146100515780631c582cf71461006f578063711283d11461008d578063f1068454146100dd575b600080fd5b610059610127565b6040518082815260200191505060405180910390f35b61007761012d565b6040518082815260200191505060405180910390f35b6100c3600480360360408110156100a357600080fd5b810190808035906020019092919080359060200190929190505050610133565b604051808215151515815260200191505060405180910390f35b6100e561018e565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b60015481565b60005481565b6000826000819055508160018190555033600260006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055506001905092915050565b600260009054906101000a900473ffffffffffffffffffffffffffffffffffffffff168156fea265627a7a72315820ecebf28ae92adcc8e0c6384f054c890af8d07edf4fa719747c8e9ab514b5126664736f6c63430005100032",
+  "metadata": "{\"compiler\":{\"version\":\"0.5.16+commit.9c3226ce\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":true,\"inputs\":[],\"name\":\"face\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"pid\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"quantity\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"f\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"q\",\"type\":\"uint256\"}],\"name\":\"setBid\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"success\",\"type\":\"bool\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/home/mayank/Study/BC/liar-dice-dapp/contracts/LiarsDice.sol\":\"Bid\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/home/mayank/Study/BC/liar-dice-dapp/contracts/LiarsDice.sol\":{\"keccak256\":\"0x754a430ed1794e316502d090b76eeb3bea124427ad3c4abd4f384677036f3a6e\",\"urls\":[\"bzz-raw://cf2af5fcd95d7f56faba2bf5ee5f04b82c51bb5d4968af49aab32f1e4d148502\",\"dweb:/ipfs/QmdATFGCzSZJUUwu4cd6PvTnPbboTEaWSjPLkmiqtRbEyg\"]}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b506101e9806100206000396000f3fe608060405234801561001057600080fd5b506004361061004c5760003560e01c806317fc45e2146100515780631c582cf71461006f578063711283d11461008d578063f1068454146100dd575b600080fd5b610059610127565b6040518082815260200191505060405180910390f35b61007761012d565b6040518082815260200191505060405180910390f35b6100c3600480360360408110156100a357600080fd5b810190808035906020019092919080359060200190929190505050610133565b604051808215151515815260200191505060405180910390f35b6100e561018e565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b60015481565b60005481565b6000826000819055508160018190555033600260006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055506001905092915050565b600260009054906101000a900473ffffffffffffffffffffffffffffffffffffffff168156fea265627a7a7231582048101fc989dcbaa11339a721cdc1c5e3003def83be5b2bfdbfe52bd56746726e64736f6c63430005100032",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b506004361061004c5760003560e01c806317fc45e2146100515780631c582cf71461006f578063711283d11461008d578063f1068454146100dd575b600080fd5b610059610127565b6040518082815260200191505060405180910390f35b61007761012d565b6040518082815260200191505060405180910390f35b6100c3600480360360408110156100a357600080fd5b810190808035906020019092919080359060200190929190505050610133565b604051808215151515815260200191505060405180910390f35b6100e561018e565b604051808273ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200191505060405180910390f35b60015481565b60005481565b6000826000819055508160018190555033600260006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055506001905092915050565b600260009054906101000a900473ffffffffffffffffffffffffffffffffffffffff168156fea265627a7a7231582048101fc989dcbaa11339a721cdc1c5e3003def83be5b2bfdbfe52bd56746726e64736f6c63430005100032",
   "sourceMap": "66:222:0:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;66:222:0;;;;;;;",
   "deployedSourceMap": "66:222:0:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;66:222:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;102:20;;;:::i;:::-;;;;;;;;;;;;;;;;;;;82:16;;;:::i;:::-;;;;;;;;;;;;;;;;;;;149:137;;;;;;13:2:-1;8:3;5:11;2:2;;;29:1;26;19:12;2:2;149:137:0;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;126:18;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;102:20;;;;:::o;82:16::-;;;;:::o;149:137::-;196:12;223:1;216:4;:8;;;;241:1;230:8;:12;;;;254:10;248:3;;:16;;;;;;;;;;;;;;;;;;277:4;270:11;;149:137;;;;:::o;126:18::-;;;;;;;;;;;;;:::o",
-  "source": "// SPDX-License-Identifier: MIT\npragma solidity >=0.4.22 <0.8.0;\n\ncontract Bid{\n  uint public face;\n  uint public quantity;\n  address public pid;\n\n  function setBid(uint f, uint q) public returns(bool success) {\n    face = f;\n    quantity = q;\n    pid = msg.sender;\n    return true;\n  }\n}\n\ncontract Player{\n  address payable public id;\n  uint public noDices;\n  constructor (address payable _id, uint _noDices) public {\n    id = _id;\n    noDices = _noDices;\n  }\n}\n\ncontract LiarsDice {\n  uint public noPlayers;\n  uint public turn;\n  uint[] private faceNumber = new uint[](7);\n  Bid public lastBid = new Bid();\n  Player[] public players = new Player[](10);\n\n  // The bids are stored in a hashed format so that it is not visible even to the seller\n  mapping(address => bytes32) private hashedDice;\n\n  // A constructor taking in the bidding time and revealing time as parameters\n  constructor () public {\n    lastBid.setBid(1,0);\n    noPlayers = 0;\n    faceNumber = [0,0,0,0,0,0,0];\n  }\n\n  // A function to be called by the highBidder with the secondBid value to pay to the owner\n  function registerParticipant() public payable {\n    players[noPlayers] = new Player(msg.sender,5);\n    noPlayers++;\n  }\n\n  function setDice(bytes32 h) public {\n    hashedDice[msg.sender] = h;\n  }\n\n  function bid(uint f, uint q) public {\n    require(f>=1 && f<=6, \"Dice Face Not Valid\");\n    lastBid.setBid(f,q);\n  }\n\n  function revealDice(uint f1, uint f2, uint f3, uint f4, uint f5) public {\n    require(keccak256(abi.encodePacked(f1,f2,f3,f4,f5)) == hashedDice[msg.sender], \"Revealed Bid or Nonce don't match\");\n    faceNumber[f1]++;\n    faceNumber[f2]++;\n    faceNumber[f3]++;\n    faceNumber[f4]++;\n    faceNumber[f5]++;\n  }\n\n  function challenge() public view returns (bool){\n    uint quantity = faceNumber[lastBid.face()];\n    if(quantity >= lastBid.quantity())\n      return false;\n    else\n      return true;\n  }\n}",
-  "sourcePath": "/home/sankalp/courses/bc/liar-dice-dapp/contracts/LiarsDice.sol",
+  "source": "// SPDX-License-Identifier: MIT\npragma solidity >=0.4.22 <0.8.0;\n\ncontract Bid{\n  uint public face;\n  uint public quantity;\n  address public pid;\n\n  function setBid(uint f, uint q) public returns(bool success) {\n    face = f;\n    quantity = q;\n    pid = msg.sender;\n    return true;\n  }\n}\n\ncontract Player{\n  address payable public id;\n  uint public noDices;\n  constructor (address payable _id, uint _noDices) public {\n    id = _id;\n    noDices = _noDices;\n  }\n}\n\ncontract LiarsDice {\n  uint public noPlayers;\n  uint public turn;\n  uint[] private faceNumber = new uint[](7);\n  Bid public lastBid = new Bid();\n  Player[] public players = new Player[](10);\n\n  // The bids are stored in a hashed format so that it is not visible even to the seller\n  mapping(address => bytes32) private hashedDice;\n\n  // A constructor taking in the bidding time and revealing time as parameters\n  constructor () public {\n    lastBid.setBid(1,0);\n    noPlayers = 4;\n    faceNumber = [0,0,0,0,0,0,0];\n  }\n\n  // A function to be called by the highBidder with the secondBid value to pay to the owner\n  function registerParticipant() public payable {\n    players[noPlayers] = new Player(msg.sender,5);\n    noPlayers++;\n  }\n\n  function setDice(bytes32 h) public {\n    hashedDice[msg.sender] = h;\n  }\n\n  function bid(uint f, uint q) public {\n    require(f>=1 && f<=6, \"Dice Face Not Valid\");\n    lastBid.setBid(f,q);\n  }\n\n  function revealDice(uint f1, uint f2, uint f3, uint f4, uint f5) public {\n    require(keccak256(abi.encodePacked(f1,f2,f3,f4,f5)) == hashedDice[msg.sender], \"Revealed Bid or Nonce don't match\");\n    faceNumber[f1]++;\n    faceNumber[f2]++;\n    faceNumber[f3]++;\n    faceNumber[f4]++;\n    faceNumber[f5]++;\n  }\n\n  function challenge() public view returns (bool){\n    uint quantity = faceNumber[lastBid.face()];\n    if(quantity >= lastBid.quantity())\n      return false;\n    else\n      return true;\n  }\n}",
+  "sourcePath": "/home/mayank/Study/BC/liar-dice-dapp/contracts/LiarsDice.sol",
   "ast": {
-    "absolutePath": "/home/sankalp/courses/bc/liar-dice-dapp/contracts/LiarsDice.sol",
+    "absolutePath": "/home/mayank/Study/BC/liar-dice-dapp/contracts/LiarsDice.sol",
     "exportedSymbols": {
       "Bid": [
         33
@@ -1281,7 +1281,7 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "hexValue": "30",
+                      "hexValue": "34",
                       "id": 94,
                       "isConstant": false,
                       "isLValue": false,
@@ -1292,10 +1292,10 @@
                       "src": "942:1:0",
                       "subdenomination": null,
                       "typeDescriptions": {
-                        "typeIdentifier": "t_rational_0_by_1",
-                        "typeString": "int_const 0"
+                        "typeIdentifier": "t_rational_4_by_1",
+                        "typeString": "int_const 4"
                       },
-                      "value": "0"
+                      "value": "4"
                     },
                     "src": "930:13:0",
                     "typeDescriptions": {
@@ -3331,7 +3331,7 @@
     "src": "32:1866:0"
   },
   "legacyAST": {
-    "absolutePath": "/home/sankalp/courses/bc/liar-dice-dapp/contracts/LiarsDice.sol",
+    "absolutePath": "/home/mayank/Study/BC/liar-dice-dapp/contracts/LiarsDice.sol",
     "exportedSymbols": {
       "Bid": [
         33
@@ -4531,7 +4531,7 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "hexValue": "30",
+                      "hexValue": "34",
                       "id": 94,
                       "isConstant": false,
                       "isLValue": false,
@@ -4542,10 +4542,10 @@
                       "src": "942:1:0",
                       "subdenomination": null,
                       "typeDescriptions": {
-                        "typeIdentifier": "t_rational_0_by_1",
-                        "typeString": "int_const 0"
+                        "typeIdentifier": "t_rational_4_by_1",
+                        "typeString": "int_const 4"
                       },
-                      "value": "0"
+                      "value": "4"
                     },
                     "src": "930:13:0",
                     "typeDescriptions": {
@@ -6586,7 +6586,7 @@
   },
   "networks": {},
   "schemaVersion": "3.2.4",
-  "updatedAt": "2020-10-08T06:54:22.365Z",
+  "updatedAt": "2020-10-08T13:20:12.893Z",
   "devdoc": {
     "methods": {}
   },

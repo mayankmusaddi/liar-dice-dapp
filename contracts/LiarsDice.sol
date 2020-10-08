@@ -36,7 +36,7 @@ contract LiarsDice {
   // A constructor taking in the bidding time and revealing time as parameters
   constructor () public {
     lastBid.setBid(1,0);
-    noPlayers = 0;
+    noPlayers = 4;
     faceNumber = [0,0,0,0,0,0,0];
   }
 
