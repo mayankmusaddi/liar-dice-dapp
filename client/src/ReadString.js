@@ -25,9 +25,11 @@ class ReadString extends React.Component {
         const myAccount = MyStringStore.myString[this.state.account];
 
         // if it exists, then we display its value
-        return <><p>My stored string: {myString && myString.value}</p>
+        
+        return <div>
+                    <p>My stored string: {myString && myString.value}</p>
                     <p>My Connected Account : {myAccount && myAccount.value}</p>
-                </>;
+                </div>;
     }
 }
 

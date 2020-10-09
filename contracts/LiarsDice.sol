@@ -2,7 +2,7 @@
 pragma solidity >=0.4.22 <0.8.0;
 
 contract LiarsDice {
-  uint public noPlayers;
+  uint public numPlayers;
   address payable[] public players = new address payable[](10);
 
   uint public turn;
@@ -12,22 +12,22 @@ contract LiarsDice {
   uint public bidQuantity;
   address payable public bidAddress;
 
-  // The bids are stored in a hashed format so that it is not visible even to the seller
+  // The dice faces are hashed and sent to contract
   mapping(address => bytes32) private hashedDice;
 
   // A constructor taking in the bidding time and revealing time as parameters
   constructor () public {
     bidFace = 0;
     bidQuantity = 0;
-    noPlayers = 0;
+    numPlayers = 0;
     faceNumber = [0,0,0,0,0,0,0];
   }
 
-  // A function to be called by the highBidder with the secondBid value to pay to the owner
+  // A function 
   function registerParticipant() public payable {
-    // players[noPlayers] = new Player(msg.sender,5);
-    players[noPlayers] = msg.sender;
-    noPlayers++;
+    // players[numPlayers] = new Player(msg.sender,5);
+    players[numPlayers] = msg.sender;
+    numPlayers++;
   }
 
   function setDice(bytes32 h) public {
@@ -40,8 +40,8 @@ contract LiarsDice {
     bidAddress = msg.sender;
   }
 
-  function revealDice(uint f1, uint f2, uint f3, uint f4, uint f5) public {
-    require(keccak256(abi.encodePacked(f1,f2,f3,f4,f5)) == hashedDice[msg.sender], "Revealed Bid or Nonce don't match");
+  function revealDice(uint f1, uint f2, uint f3, uint f4, uint f5, uint nonce) public {
+    require(keccak256(abi.encodePacked(f1,f2,f3,f4,f5, nonce)) == hashedDice[msg.sender], "Revealed Bid or Nonce don't match");
     faceNumber[f1]++;
     faceNumber[f2]++;
     faceNumber[f3]++;

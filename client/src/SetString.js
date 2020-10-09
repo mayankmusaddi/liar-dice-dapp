@@ -40,8 +40,9 @@ class SetString extends React.Component {
     render() {
         return (
             <div>
-                <input type="text" onKeyDown={this.handleKeyDown} />
-                <div>{this.getTxStatus()}</div>
+                {/* <input type="text" onKeyDown={this.handleKeyDown} />
+                <div>{this.getTxStatus()}</div> */}
+                {/* <button>Register</button> */}
             </div>
         );
     }
