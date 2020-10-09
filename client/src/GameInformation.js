@@ -5,7 +5,7 @@ class GameInformation extends React.Component {
         super();
         this.state = {
             id : "",
-            registeredPlayers : {},
+            registeredPlayers : JSON.parse(localStorage.getItem('registeredPlayers')) || {},
             numPlayersKey : null,
             playersKey : null,
             turnKey : null,
@@ -13,7 +13,16 @@ class GameInformation extends React.Component {
             bidQuantityKey : null,
         }
         this.register = this.register.bind(this);
+        // localStorage.setItem('registeredPlayers', JSON.stringify(this.state.registeredPlayers));
+        // this.getInitialState();
     }
+
+    getInitialState = () => {
+        // console.log(localStorage.getItem('registeredPlayers'));
+        var registeredPlayers = JSON.parse(localStorage.getItem('registeredPlayers')) || {};
+        this.setState({registeredPlayers});
+    }
+
     register = (event)=> {
         const { drizzle, drizzleState } = this.props;
         const contract = drizzle.contracts.LiarsDice;
@@ -22,10 +31,17 @@ class GameInformation extends React.Component {
         const stackId = contract.methods["registerParticipant"].cacheSend({
             from: drizzleState.accounts[0]
         });
-        this.state.registeredPlayers[drizzleState.accounts[0]] = true;
+        console.log(this.state.registeredPlayers);
+        let newregisteredPlayers = this.state.registeredPlayers;
+        console.log(newregisteredPlayers);
+        newregisteredPlayers[drizzleState.accounts[0]] = true;
+        localStorage.setItem('registeredPlayers', JSON.stringify(newregisteredPlayers));
+        // console.log(localStorage.getItem('registeredPlayers'));
+        this.setState({registeredPlayers : newregisteredPlayers});
     }
 
     componentDidMount() {
+        this.getInitialState();
         const { drizzle, drizzleState } = this.props;
         const id =  drizzleState.accounts[0];
 
