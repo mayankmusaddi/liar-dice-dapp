@@ -1,4 +1,7 @@
 import React from "react";
+import ReactDice from "react-dice-complete";
+import 'react-dice-complete/dist/react-dice-complete.css'
+import * as styles from './App.css'
 const { soliditySha3 } = require("web3-utils");
 
 class GameInformation extends React.Component {
@@ -16,7 +19,9 @@ class GameInformation extends React.Component {
             bidFaceKey : null,
             bidQuantityKey : null,
         }
+        this.reactDice = null;
         this.register = this.register.bind(this);
+
         // localStorage.setItem('registeredPlayers', JSON.stringify(this.state.registeredPlayers));
         // this.getInitialState();
     }
@@ -76,6 +81,12 @@ class GameInformation extends React.Component {
         this.setState({registeredPlayers, playersDice, playersDiceString, playersNonce});
     }
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.reactDice) {
+            this.reactDice.rollAll([1,6,2,5,3]);
+        }
+    }
+
     componentDidMount() {
         this.getInitialState();
         const { drizzle, drizzleState } = this.props;
@@ -89,9 +100,12 @@ class GameInformation extends React.Component {
         const turnKey = contract.methods["turn"].cacheCall();
         const bidFaceKey = contract.methods["bidFace"].cacheCall();
         const bidQuantityKey = contract.methods["bidQuantity"].cacheCall();
-
         // save the `dataKey` to local component state for later reference
+        if (this.reactDice)
+            this.reactDice.rollAll([1,6,2,5,3]);
+        console.log("cmd");
         this.setState({ id, numPlayersKey, playersKey, turnKey, bidFaceKey, bidQuantityKey });
+
     }
 
     render() {
@@ -105,7 +119,7 @@ class GameInformation extends React.Component {
         const turn = LiarsDice.turn[this.state.turnKey];
         const bidFace = LiarsDice.bidFace[this.state.bidFaceKey];
         const bidQuantity = LiarsDice.bidQuantity[this.state.bidQuantityKey];
-
+        // this.reactDice = [];
         // const activePlayers = players && players.value.map((id, i) =>
         //     <p>{i<numPlayers.value && id}</p>
         // );
@@ -120,6 +134,37 @@ class GameInformation extends React.Component {
                     <p>You have been successfully registered.</p>
                     <p>My Connected Account : {curAccount}</p>
                     <p>My dices are {myDice}</p>
+                    <form>
+                        <input type={"number"} value={1} max={6} min={1}/>
+                        <input type={"number"} value={1} max={numPlayers*5} min={1}/>
+                        <button className={"ld-button"}>Bid</button>
+                    </form>
+                    <button className={"ld-button"}>Challenge</button>
+
+                    <h4>Your Roll</h4>
+                    {/*<button className={"ld-button"} onClick={(e) => {this.reactDice.map((item, i) => {  console.log(item);  item.rollAll([i]);})}}>Roll</button>*/}
+                    <button className={"ld-button"} onClick={() => this.reactDice.rollAll([1,2,3,4,5])}>Roll</button>
+                    <ReactDice
+                      ref={dice => {console.log("rolll"); this.reactDice=dice}}
+                      faceColor={"#ffffff"}
+                        dotColor={"#000000"}
+                        numDice={5}
+                        defaultRoll={2}
+
+                    />
+
+                    {/*{this.state.playersDice[curAccount].map((item, i) => {*/}
+                    {/*    return (*/}
+                    {/*      <ReactDice*/}
+                    {/*        faceColor={"#ffffff"}*/}
+                    {/*        dotColor={"#000000"}*/}
+                    {/*        numDice={1}*/}
+                    {/*        rollDone={() => {}}*/}
+                    {/*        defaultRoll={item}*/}
+                    {/*        ref={dice => this.reactDice.push(dice)}*/}
+                    {/*      />*/}
+                    {/*    )*/}
+                    {/*})}*/}
             </div>
             );
             return <div><p>You have been successfully registered.</p><br></br><br></br>
