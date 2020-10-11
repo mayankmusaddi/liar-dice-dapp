@@ -1,6 +1,6 @@
 html,body {
-  /*display: flex;*/
-  /*flex: 1;*/
+  display: flex;
+/*   flex: 1; */
   margin: 0;
   height: 100%;
   font-family: 'Titillium Web', sans-serif;
