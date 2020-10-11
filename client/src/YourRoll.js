@@ -3,10 +3,11 @@ import ReactDice from "react-dice-complete";
 import 'react-dice-complete/dist/react-dice-complete.css'
 
 export default ({
-  numDice
+  numDice,
+  containerStyle
                 }) => {
   return (
-    <div>
+    <div style={containerStyle}>
       <p>Your Roll</p>
       <ReactDice
         numDice={numDice}

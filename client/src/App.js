@@ -38,35 +38,35 @@ class App extends React.Component {
 
     return (
       <div className="App">
-        <div className={'page-1'}>
-          {/*<Intro/>*/}
-        </div>
-        <div className={'page-2'}>
-          {/*<GameWaiting playerNo={2} numPlayer={4} remainingPlayers={2}/>*/}
-        </div>
-        <div className={'page-3'} >
-          {/*<LastBid value={4} bidValue={2}/>*/}
-          {/*<PlayerInfo infos={["Player 1 is bidding"]}/>*/}
-          {/*<YourRoll/>*/}
-        </div>
-        <div className={'page-4'}>
-          {/*<LastBid value={3}/>*/}
-          {/*<YourTurn/>*/}
-          {/*<YourRoll/>*/}
-        </div>
-        <div className={'page-5'}>
-          {/*<LastBid value={3}/>*/}
-          {/*<PlayerInfo infos={["Player 2 has challenged player 1"]}/>*/}
-          {/*<RevealDice/>*/}
-          {/*<YourRoll/>*/}
-        </div>
-        <div className={'page-6'}>
-          {/*<LastBid value={3}/>*/}
-          {/*<PlayerInfo infos={["Player 2 has challenged player 1", "Waiting for two players to reveal the dice"]}/>*/}
-          {/*<YourRoll/>*/}
-        </div>
-        <div className={'page-7'}>
-          <LastBid value={4} bidValue={2}/>
+        {/*<div className={'page page-1'}>*/}
+        {/*  <Intro/>*/}
+        {/*</div>*/}
+        {/*<div className={'page page-2'}>*/}
+        {/*  <GameWaiting playerNo={2} numPlayer={4} remainingPlayers={2}/>*/}
+        {/*</div>*/}
+        {/*<div className={'page page-3'} >*/}
+        {/*  <LastBid value={4} bidValue={2} containerStyle={{marginBottom:"15%"}}/>*/}
+        {/*  <PlayerInfo infos={["Player 1 is bidding"]}/>*/}
+        {/*  <YourRoll containerStyle={{marginTop: '10%'}}/>*/}
+        {/*</div>*/}
+        {/*<div className={'page page-4'}>*/}
+        {/*  <LastBid value={3} bidValue={4} containerStyle={{marginBottom: "15%"}}/>*/}
+        {/*  <YourTurn/>*/}
+        {/*  <YourRoll containerStyle={{marginTop: "10%"}}/>*/}
+        {/*</div>*/}
+        {/*<div className={'page page-5'}>*/}
+        {/*  <LastBid value={3} bidValue={5} containerStyle={{marginBottom: "15%"}}/>*/}
+        {/*  <PlayerInfo infos={["Player 2 has challenged player 1"]}/>*/}
+        {/*  <RevealDice/>*/}
+        {/*  <YourRoll containerStyle={{marginTop: "10%"}}/>*/}
+        {/*</div>*/}
+        {/*<div className={'page page-6'}>*/}
+        {/*  <LastBid value={3} bidValue={5} containerStyle={{"marginBottom": "15%"}}/>*/}
+        {/*  <PlayerInfo infos={["Player 2 has challenged player 1", "Waiting for two players to reveal the dice"]}/>*/}
+        {/*  <YourRoll  numDice={5} containerStyle={{marginTop: "10%"}}/>*/}
+        {/*</div>*/}
+        <div className={'page page-7'}>
+          <LastBid value={4} bidValue={2} containerStyle={{marginBottom: "15%"}}/>
           <GameFinish playerWon={2} bidQuantity={2} bidFace={4}/>
         </div>
 

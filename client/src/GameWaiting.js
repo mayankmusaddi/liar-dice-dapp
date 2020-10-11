@@ -6,11 +6,13 @@ export default function GameWaiting({
   remainingPlayers
                                     }) {
   return (
-    <div>
-      <p>You are <b>Player {playerNo}</b></p>
+    <div style={{display:"flex", flex:1 ,flexDirection:"column", justifyContent:"center", alignItems:"center"}}>
+      <p style={{flex:2}}>You are <b>Player {playerNo}</b></p>
       <br/><br/>
-      <p>Number of players in the game: {numPlayer}</p>
-      <p>Waiting for {remainingPlayers} more player</p>
+      <div style={{flex:2}}>
+        <p>Number of players in the game: {numPlayer}</p>
+        <p>Waiting for {remainingPlayers} more player</p>
+      </div>
     </div>
   )
 }
