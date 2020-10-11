@@ -1,4 +1,5 @@
 import React from "react";
+// import Math
 
 class BidChallenge extends React.Component {
     constructor() {
@@ -35,7 +36,7 @@ class BidChallenge extends React.Component {
         event.preventDefault();
 
         const { drizzle, drizzleState } = this.props;
-        const contract = drizzle.contracts.MyStringStore;
+        const contract = drizzle.contracts.LiarsDice;
 
         // let drizzle know we want to call the `set` method with `value`
         contract.methods["makeBid"].cacheSend(this.state.bidFace, this.state.bidQuantity, {
@@ -49,7 +50,7 @@ class BidChallenge extends React.Component {
         event.preventDefault();
 
         const { drizzle, drizzleState } = this.props;
-        const contract = drizzle.contracts.MyStringStore;
+        const contract = drizzle.contracts.LiarsDice;
 
         // let drizzle know we want to call the `set` method with `value`
         contract.methods["challenge"].cacheSend({
@@ -78,12 +79,12 @@ class BidChallenge extends React.Component {
         
         // let drizzle know we want to watch the `myString` method
         const numPlayersKey = contract.methods["numPlayers"].cacheCall();
-        const playersKey = contract.methods["curBidder"].cacheCall();
+        const curBidderKey = contract.methods["curBidder"].cacheCall();
         const turnKey = contract.methods["turn"].cacheCall();
         const bidFaceKey = contract.methods["bidFace"].cacheCall();
         const bidQuantityKey = contract.methods["bidQuantity"].cacheCall();
         // save the `dataKey` to local component state for later reference
-        this.setState({ id, numPlayersKey, playersKey, turnKey, bidFaceKey, bidQuantityKey });
+        this.setState({ id, numPlayersKey, curBidderKey, turnKey, bidFaceKey, bidQuantityKey });
     }
 
     render() {
@@ -106,7 +107,7 @@ class BidChallenge extends React.Component {
         if(numPlayers) console.log("numplayers", numPlayers.value);
         console.log("curAccount", curAccount)
         console.log("curBidder", curBidder)
-        if(!curBidder || curBidder !== curAccount) return "Not Your Turn";
+        if(!curBidder || curBidder.value !== curAccount) return "Not Your Turn";
         return (
             <div>
                 <form onSubmit={this.handleBid}>
@@ -116,8 +117,8 @@ class BidChallenge extends React.Component {
                             type={"number"}
                             className="form-control"
                             onChange={this.handleBidFaceChange}
-                            value={bidFace && bidFace.value}
-                            min={bidFace && bidFace.value}
+                            value={this.state.formData.bidFace}
+                            min={bidFace && Math.max(bidFace.value, 1)}
                             max={6}
                         />
                     </div>
@@ -126,8 +127,8 @@ class BidChallenge extends React.Component {
                         <input 
                             type={"number"} 
                             onChange={this.handleBidQuantChange} 
-                            value={bidQuantity && bidQuantity.value}
-                            min={bidQuantity && bidQuantity.value}
+                            value={this.state.formData.bidQuantity}
+                            min={bidQuantity && Math.max(bidQuantity.value, 1)}
                             max={numPlayers && numPlayers.value*5}
                         />
                     </div>

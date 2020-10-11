@@ -18,6 +18,7 @@ contract LiarsDice {
 
   // A constructor taking in the bidding time and revealing time as parameters
   constructor () public {
+    turn = 0;
     bidFace = 0;
     bidQuantity = 0;
     numPlayers = 0;
@@ -27,7 +28,7 @@ contract LiarsDice {
   // A function 
   function registerParticipant() public payable {
     players[numPlayers] = msg.sender;
-    if(numPlayers == 0) curBidder = msg.sender;
+    if(numPlayers == 0) curBidder = players[0];
     numPlayers++;
   }
 
@@ -39,6 +40,8 @@ contract LiarsDice {
     bidFace = f;
     bidQuantity = q;
     bidAddress = msg.sender;
+    turn = (turn + 1) % numPlayers;
+    curBidder = players[turn];
   }
 
   function revealDice(uint f1, uint f2, uint f3, uint f4, uint f5, uint nonce) public {
