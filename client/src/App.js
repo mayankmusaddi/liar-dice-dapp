@@ -1,9 +1,9 @@
 import React from 'react';
 import './App.css';
-// import ReadString from "./ReadString";
 import GameInformation from './GameInformation';
 import BidChallenge from './BidChallenge';
-
+import Intro from './Intro';
+import Roll from './Roll';
 
 class App extends React.Component {
   constructor(props) {
@@ -29,11 +29,19 @@ class App extends React.Component {
     if (this.state.loading) return "Loading Drizzle...";
     return (
       <div className="App">
-        <GameInformation
+        <Intro 
           drizzle={this.props.drizzle}
           drizzleState={this.state.drizzleState}
         />
+        {/* <GameInformation
+          drizzle={this.props.drizzle}
+          drizzleState={this.state.drizzleState}
+        /> */}
         <BidChallenge
+          drizzle={this.props.drizzle}
+          drizzleState={this.state.drizzleState}
+        />
+        <Roll
           drizzle={this.props.drizzle}
           drizzleState={this.state.drizzleState}
         />

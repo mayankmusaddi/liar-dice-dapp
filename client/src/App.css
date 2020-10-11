@@ -6,7 +6,37 @@
   height: 100%;
   background-color: #212121;
   color: #00ffff;
+  /*font-size: 30px;*/
+  flex:1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
+
+
+.page {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.page-3 {
+  display: flex;
+  flex-direction: column;
+  flex:1;
+  justify-content: center;
+  align-items: center;
+}
+
+html {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #212121;
+}
+
 
 /*.App-logo {*/
 /*  height: 40vmin;*/
@@ -38,6 +68,14 @@
   background-color: #00ffff;
   margin: 5px;
   padding: 5px 10px;
+  color: #000000;
+  border-width: 0;
+  border-radius: 5px;
+}
+
+.dice-image {
+  width: 50px;
+  height: 50px;
 }
 
 @keyframes App-logo-spin {
@@ -48,5 +86,4 @@
     transform: rotate(360deg);
   }
 }
-
 

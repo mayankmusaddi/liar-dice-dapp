@@ -1,5 +1,14 @@
-# Web 3.0 Tutorial
-Source code for the Web 3.0 Tutorial for the course on "Distributing Trust and Blockchain"
+# Brief
+Barbossa’s Brethren managed to acquire Queen Anne’s Revenge. They now
+want to recruit sailors for a journey across the seas and they offer hefty joining
+bonuses to attract young sailors. The joyous sailors decide to spend all their
+bonus before the long voyage. Help the sailors lose their money by gambling.
+You know how the saying goes: Once ye lose yer first hand, ye get hooked!
+They need a platform for gambling, and looking at the sea shell on your
+resume, they have approached you. You have to develop an online platform
+on blockchain, so that they do not make you walk the plank. Since the pirates
+do not know how to use a terminal, they want you to also develop a front
+end for the dApp
 
 # Usage
 1. Clone the repository
@@ -17,5 +26,5 @@ Source code for the Web 3.0 Tutorial for the course on "Distributing Trust and B
 ├── client - The react client which is housed in its separate repository
 ├── contracts - All your solidity contracts go here
 ├── migrations - Contains all migrations for deploying your contracts
-└── test - Ignore for now
+└── Test_cases - contains the tests
 ```

@@ -1,6 +1,24 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.4.22 <0.8.0;
 
+/*******************************************************************************
+ * A brief history of Liars Dice.
+ *
+ * Liars dice game made using smart contracts. It starts with
+ * a forward slash followed by some number, n, of asterisks, where n > 2. It's
+ * written this way to be more "visible" to developers who are reading the
+ * source code.
+ *
+ * Often, developers are unaware that this is not (by default) a valid Doxygen
+ * comment block!
+ *
+ *
+ * This style of commenting behaves well with clang-format.
+ *
+ * Even if there is only one possible unified theory. it is just a
+ *               set of rules and equations.
+ ******************************************************************************/
+
 contract LiarsDice {
     uint256 public numPlayers;
     address payable[] public players = new address payable[](10);
@@ -23,6 +41,9 @@ contract LiarsDice {
     uint256 public quantity;
 
     // A constructor taking in the bidding time and revealing time as parameters
+    /** constructor for contract. 
+     *  The documentation block cannot be put after the con! 
+     */
     constructor() public {
         turn = 0;
         bidFace = 0;
@@ -31,17 +52,23 @@ contract LiarsDice {
         faceNumber = [0, 0, 0, 0, 0, 0, 0];
     }
 
-    // A function
+    /** Function of Solidity. 
+     *  The documentation block cannot be put after the enum! 
+     */
     function registerParticipant() public payable {
         players[numPlayers] = msg.sender;
         if (numPlayers == 0) curBidder = players[0];
         numPlayers++;
     }
 
+    
     function setDice(bytes32 h) public {
         hashedDice[msg.sender] = h;
     }
 
+    /** Function of Solidity. 
+     *  The documentation block cannot be put after the enum! 
+     */
     function makeBid(uint256 f, uint256 q) public {
         bidFace = f;
         bidQuantity = q;
@@ -56,6 +83,9 @@ contract LiarsDice {
         revealLeft = numPlayers;
     }
 
+    /** Function of Solidity. 
+     *  The documentation block cannot be put after the enum! 
+     */
     function revealDice(
         uint256 f1,
         uint256 f2,
@@ -91,6 +121,9 @@ contract LiarsDice {
         }
     }
 
+    /** Function of Solidity. 
+     *  The documentation block cannot be put after the enum! 
+     */
     function getAllPlayers() public view returns (address payable[] memory) {
         return players;
     }

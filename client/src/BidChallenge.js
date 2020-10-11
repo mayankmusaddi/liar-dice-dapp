@@ -1,5 +1,6 @@
 import React from "react";
-// import Math
+import LastBid from './LastBid';
+import LDButton from "./components/LDButton";
 
 class BidChallenge extends React.Component {
   constructor() {
@@ -7,6 +8,7 @@ class BidChallenge extends React.Component {
     this.state = {
       id: "",
       registeredPlayers: {},
+      isRolled : {},
       hasRevealed: {},
       formData: {
         bidFace: 0,
@@ -37,9 +39,12 @@ class BidChallenge extends React.Component {
     var registeredPlayers = JSON.parse(
       localStorage.getItem("registeredPlayers")
     );
+    var isRolled = JSON.parse(
+        localStorage.getItem("isRolled")
+    );
 
     var hasRevealed = JSON.parse(localStorage.getItem("hasRevealed"));
-    this.setState({ registeredPlayers, hasRevealed });
+    this.setState({ registeredPlayers, hasRevealed, isRolled });
   };
 
   handleBid = (event) => {
@@ -108,11 +113,12 @@ class BidChallenge extends React.Component {
   }
 
   componentDidMount() {
+    this.getInitialState();
     const { drizzle, drizzleState } = this.props;
     const id = drizzleState.accounts[0];
 
     const contract = drizzle.contracts.LiarsDice;
-
+    console.log(contract);
     // let drizzle know we want to watch the `myString` method
     const numPlayersKey = contract.methods["numPlayers"].cacheCall();
     const curBidderKey = contract.methods["curBidder"].cacheCall();
@@ -125,7 +131,6 @@ class BidChallenge extends React.Component {
     const winnerKey = contract.methods["winner"].cacheCall();
     const winnerIndexKey = contract.methods["winnerIndex"].cacheCall();
     // save the `dataKey` to local component state for later reference
-    this.getInitialState();
     this.setState({
       id,
       numPlayersKey,
@@ -147,7 +152,6 @@ class BidChallenge extends React.Component {
     const { LiarsDice } = drizzleState.contracts;
     const curAccount = drizzleState.accounts[0];
 
-    const curRegistered = this.state.registeredPlayers[curAccount];
     const numPlayers = LiarsDice.numPlayers[this.state.numPlayersKey];
     const curBidder = LiarsDice.curBidder[this.state.curBidderKey];
     const bidFace = LiarsDice.bidFace[this.state.bidFaceKey];
@@ -157,23 +161,34 @@ class BidChallenge extends React.Component {
     const quantity = LiarsDice.quantity[this.state.quantityKey];
     const winner = LiarsDice.winner[this.state.winnerKey];
     const winnerIndex = LiarsDice.winnerIndex[this.state.winnerIndexKey];
-
+    
     const challengeState =
-      LiarsDice.challengeState[this.state.challengeStateKey];
+    LiarsDice.challengeState[this.state.challengeStateKey];
 
     // if it exists, then we display its value
     const prevPlayer =
-      turn && (turn.value == 0 ? numPlayers && numPlayers.value : turn.value);
-
+    turn && (turn.value == 0 ? numPlayers && numPlayers.value : turn.value);
+    
+    // states
+    const curRegistered = this.state.registeredPlayers[curAccount];
+    const curRolled = this.state.isRolled[curAccount];
     const curRevealed = this.state.hasRevealed[curAccount];
-    console.log(curRevealed);
-    console.log(revealLeft);
 
     if (!curRegistered) return "";
+    if(!curRolled){
+        return (
+            <div>
+                <p>You are <b>Player {numPlayers && numPlayers.value}</b></p>
+                <br/><br/>
+                <p>Number of players in the game: {4}</p>
+            </div>
+        )
+    }
     if (challengeState && challengeState.value == 1) {
       if (revealLeft && revealLeft.value == 0) {
         return (
           <div>
+            <LastBid value={bidFace && bidFace.value} bidValue={bidQuantity && bidQuantity.value}/>
             <p>
               Player {winnerIndex && winnerIndex.value} has won the Challenge
             </p>
@@ -187,6 +202,7 @@ class BidChallenge extends React.Component {
       if (curRevealed && revealLeft && revealLeft.value != 0) {
         return (
           <div>
+            <LastBid value={bidFace && bidFace.value} bidValue={bidQuantity && bidQuantity.value}/>
             <p>
               Player {turn && parseInt(turn.value) + 1} Challenged Player{" "}
               {prevPlayer}
@@ -197,6 +213,7 @@ class BidChallenge extends React.Component {
       }
       return (
         <div>
+            <LastBid value={bidFace && bidFace.value} bidValue={bidQuantity && bidQuantity.value}/>
           <p>
             Player {turn && parseInt(turn.value) + 1} Challenged Player{" "}
             {prevPlayer}
@@ -207,10 +224,42 @@ class BidChallenge extends React.Component {
         </div>
       );
     }
-    if (!curBidder || curBidder.value !== curAccount) return "Not Your Turn";
+    if (!curBidder || curBidder.value !== curAccount){
+        return (
+            <div>
+                <LastBid value={bidFace && bidFace.value} bidValue={bidQuantity && bidQuantity.value}/>
+                <p><b> Player {turn && parseInt(turn.value) + 1}</b> is Bidding</p>
+            </div>
+        )
+    };
     return (
       <div>
+        <LastBid value={bidFace && bidFace.value} bidValue={bidQuantity && bidQuantity.value}/>
         <form onSubmit={this.handleBid}>
+            <input
+                type={"number"}
+                placeholder="Face Value"
+                className="form-control"
+                onChange={this.handleBidFaceChange}
+                min={bidFace && Math.max(bidFace.value, 1)}
+                max={6}
+                style={{width:100}}
+            />
+            <input
+                type={"number"}
+                placeholder="Quantity"
+                onChange={this.handleBidQuantChange}
+                min={bidQuantity && Math.max(bidQuantity.value, 1)}
+                max={numPlayers && numPlayers.value * 5}
+                style={{width:100}}
+            />
+            <LDButton title={"Bid"} titleStyle={{fontWeight: "bold", paddingLeft: 20, paddingRight: 20, paddingTop: 5, paddingBottom: 5}}/>
+      </form>
+      <form onSubmit={this.handleChallenge}>
+        <LDButton title={"Challenge"} titleStyle={{fontWeight: "bold", paddingLeft: 20, paddingRight: 20, paddingTop: 5, paddingBottom: 5}}/>
+      </form>
+
+        {/* <form onSubmit={this.handleBid}>
           <div className="form-groups">
             <label>Dice Face</label>
             <input
@@ -236,7 +285,7 @@ class BidChallenge extends React.Component {
         </form>
         <form onSubmit={this.handleChallenge}>
           <button>Challenge</button>
-        </form>
+        </form> */}
       </div>
     );
   }
