@@ -19,6 +19,8 @@ contract LiarsDice {
     uint256 public challengeState;
     uint256 public revealLeft;
     address payable public winner;
+    uint256 public winnerIndex;
+    uint256 public quantity;
 
     // A constructor taking in the bidding time and revealing time as parameters
     constructor() public {
@@ -31,7 +33,6 @@ contract LiarsDice {
 
     // A function
     function registerParticipant() public payable {
-        require(msg.value >= 10, "Send Atleast 10 Ethers to Play");
         players[numPlayers] = msg.sender;
         if (numPlayers == 0) curBidder = players[0];
         numPlayers++;
@@ -80,9 +81,14 @@ contract LiarsDice {
     }
 
     function checkWin() public {
-        uint256 quantity = faceNumber[bidFace];
-        if (quantity >= bidQuantity) winner = bidAddress;
-        else winner = challenger;
+        quantity = faceNumber[bidFace];
+        if (quantity >= bidQuantity) {
+            winner = bidAddress;
+            winnerIndex = (turn == 0) ? numPlayers : turn;
+        } else {
+            winner = challenger;
+            winnerIndex = (turn + 1);
+        }
     }
 
     function getAllPlayers() public view returns (address payable[] memory) {

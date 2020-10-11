@@ -22,9 +22,6 @@ class GameInformation extends React.Component {
     this.reactDice = null;
     this.register = this.register.bind(this);
     this.handleBidInput = this.handleBidInput.bind(this);
-
-    // localStorage.setItem('registeredPlayers', JSON.stringify(this.state.registeredPlayers));
-    // this.getInitialState();
   }
 
   getInitialState = () => {

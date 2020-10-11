@@ -18,6 +18,10 @@ class BidChallenge extends React.Component {
       bidFaceKey: null,
       bidQuantityKey: null,
       challengeStateKey: null,
+      revealLeftKey: null,
+      quantityKey: null,
+      winnerKey: null,
+      winnerIndexKey: null,
     };
     this.handleBid = this.handleBid.bind(this);
     this.handleReveal = this.handleReveal.bind(this);
@@ -83,6 +87,11 @@ class BidChallenge extends React.Component {
       playersDice[curAccount][4],
       playersNonce[curAccount]
     );
+
+    let hasRevealed = this.state.hasRevealed || {};
+    hasRevealed[curAccount] = true;
+    localStorage.setItem("hasRevealed", JSON.stringify(hasRevealed));
+    this.setState({ hasRevealed });
   };
 
   handleBidFaceChange(event) {
@@ -111,6 +120,10 @@ class BidChallenge extends React.Component {
     const bidFaceKey = contract.methods["bidFace"].cacheCall();
     const bidQuantityKey = contract.methods["bidQuantity"].cacheCall();
     const challengeStateKey = contract.methods["challengeState"].cacheCall();
+    const revealLeftKey = contract.methods["revealLeft"].cacheCall();
+    const quantityKey = contract.methods["quantity"].cacheCall();
+    const winnerKey = contract.methods["winner"].cacheCall();
+    const winnerIndexKey = contract.methods["winnerIndex"].cacheCall();
     // save the `dataKey` to local component state for later reference
     this.getInitialState();
     this.setState({
@@ -121,6 +134,10 @@ class BidChallenge extends React.Component {
       bidFaceKey,
       bidQuantityKey,
       challengeStateKey,
+      revealLeftKey,
+      quantityKey,
+      winnerKey,
+      winnerIndexKey,
     });
   }
 
@@ -136,6 +153,10 @@ class BidChallenge extends React.Component {
     const bidFace = LiarsDice.bidFace[this.state.bidFaceKey];
     const bidQuantity = LiarsDice.bidQuantity[this.state.bidQuantityKey];
     const turn = LiarsDice.turn[this.state.turnKey];
+    const revealLeft = LiarsDice.revealLeft[this.state.revealLeft];
+    const quantity = LiarsDice.quantity[this.state.quantity];
+    const winner = LiarsDice.winner[this.state.winner];
+    const winnerIndex = LiarsDice.winnerIndex[this.state.winnerIndex];
 
     const challengeState =
       LiarsDice.challengeState[this.state.challengeStateKey];
@@ -144,10 +165,35 @@ class BidChallenge extends React.Component {
     const prevPlayer =
       turn && (turn.value == 0 ? numPlayers && numPlayers.value : turn.value);
 
-    console.log("Check State", challengeState && challengeState.value);
+    const curRevealed =
+      this.state.hasRevealed && this.state.hasRevealed[curAccount];
 
     if (!curRegistered) return "";
     if (challengeState && challengeState.value == 1) {
+      if (revealLeft && revealLeft.value == 0) {
+        return (
+          <div>
+            <p>
+              Player {winnerIndex && winnerIndex.value} has won the Challenge
+            </p>
+            <p>
+              There were {quantity && quantity.value} dices of Face{" "}
+              {bidFace && bidFace.value}
+            </p>
+          </div>
+        );
+      }
+      if (curRevealed && revealLeft && revealLeft.value != 0) {
+        return (
+          <div>
+            <p>
+              Player {turn && parseInt(turn.value) + 1} Challenged Player{" "}
+              {prevPlayer}
+            </p>
+            <p>Waiting for {revealLeft.value} Players To Reveal</p>
+          </div>
+        );
+      }
       return (
         <div>
           <p>
