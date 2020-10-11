@@ -28,7 +28,6 @@ class BidChallenge extends React.Component {
 
         // retreiving data from local storage
         var registeredPlayers = JSON.parse(localStorage.getItem('registeredPlayers'));
-
         this.setState({registeredPlayers});
     }
 
@@ -39,11 +38,10 @@ class BidChallenge extends React.Component {
         const contract = drizzle.contracts.LiarsDice;
 
         // let drizzle know we want to call the `set` method with `value`
-        contract.methods["makeBid"].cacheSend(this.state.bidFace, this.state.bidQuantity, {
+        contract.methods["makeBid"].cacheSend(this.state.formData.bidFace, this.state.formData.bidQuantity, {
             from: drizzleState.accounts[0]
         });
 
-        window.location.reload();
     }
 
     handleChallenge = (event) => {
@@ -53,25 +51,24 @@ class BidChallenge extends React.Component {
         const contract = drizzle.contracts.LiarsDice;
 
         // let drizzle know we want to call the `set` method with `value`
-        contract.methods["challenge"].cacheSend({
+        const res = contract.methods["challenge"].cacheSend({
             from: drizzleState.accounts[0]
         });
+        if(res) window.location.reload();
 
-        window.location.reload();
     }
 
     handleBidFaceChange (event) {
-        let y = {...this.state.formData, "bidFace" : event.target.value};
-        this.setState({formData : y});
+        const formData = {...this.state.formData, "bidFace" : event.target.value};
+        this.setState({formData});
     }
 
     handleBidQuantChange (event) {
-        let y = {...this.state.formData, "bidQuantity" : event.target.value};
-        this.setState({formData : y});
+        const formData = {...this.state.formData, "bidQuantity" : event.target.value};
+        this.setState({formData});
     }
 
     componentDidMount() {
-        this.getInitialState();
         const { drizzle, drizzleState } = this.props;
         const id =  drizzleState.accounts[0];
 
@@ -84,6 +81,7 @@ class BidChallenge extends React.Component {
         const bidFaceKey = contract.methods["bidFace"].cacheCall();
         const bidQuantityKey = contract.methods["bidQuantity"].cacheCall();
         // save the `dataKey` to local component state for later reference
+        this.getInitialState();
         this.setState({ id, numPlayersKey, curBidderKey, turnKey, bidFaceKey, bidQuantityKey });
     }
 
@@ -117,7 +115,7 @@ class BidChallenge extends React.Component {
                             type={"number"}
                             className="form-control"
                             onChange={this.handleBidFaceChange}
-                            value={this.state.formData.bidFace}
+                            value={Math.max(this.state.formData.bidFace, 1)}
                             min={bidFace && Math.max(bidFace.value, 1)}
                             max={6}
                         />
@@ -127,7 +125,7 @@ class BidChallenge extends React.Component {
                         <input 
                             type={"number"} 
                             onChange={this.handleBidQuantChange} 
-                            value={this.state.formData.bidQuantity}
+                            value={Math.max(this.state.formData.bidQuantity, 1)}
                             min={bidQuantity && Math.max(bidQuantity.value, 1)}
                             max={numPlayers && numPlayers.value*5}
                         />
