@@ -8,6 +8,14 @@
   color: #00ffff;
 }
 
+html {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #212121;
+}
+
+
 /*.App-logo {*/
 /*  height: 40vmin;*/
 /*  pointer-events: none;*/
@@ -38,6 +46,14 @@
   background-color: #00ffff;
   margin: 5px;
   padding: 5px 10px;
+  color: #000000;
+  border-width: 0;
+  border-radius: 5px;
+}
+
+.dice-image {
+  width: 50px;
+  height: 50px;
 }
 
 @keyframes App-logo-spin {
