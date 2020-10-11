@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDice from "react-dice-complete";
 import 'react-dice-complete/dist/react-dice-complete.css'
-import * as styles from './App.css'
-const { soliditySha3 } = require("web3-utils");
+// import * as styles from './App.css'
+// const { soliditySha3 } = require("web3-utils");
 
 class GameInformation extends React.Component {
     constructor() {
@@ -21,6 +21,7 @@ class GameInformation extends React.Component {
         }
         this.reactDice = null;
         this.register = this.register.bind(this);
+        this.handleBidInput = this.handleBidInput.bind(this);
 
         // localStorage.setItem('registeredPlayers', JSON.stringify(this.state.registeredPlayers));
         // this.getInitialState();
@@ -38,13 +39,17 @@ class GameInformation extends React.Component {
         this.setState({registeredPlayers, playersDice, playersDiceString, playersNonce});
     }
 
+    handleBidInput = () => {
+
+    }
+
     register = (event)=> {
         const { drizzle, drizzleState } = this.props;
         const contract = drizzle.contracts.LiarsDice;
-        const curAccount = this.props.drizzleState.accounts[0];
+        const curAccount = drizzleState.accounts[0];
 
         // let drizzle know we want to call the `registerParticipant` method from `account`
-        const stackId = contract.methods["registerParticipant"].cacheSend({
+        contract.methods["registerParticipant"].cacheSend({
             from: curAccount
         });
         
@@ -62,11 +67,11 @@ class GameInformation extends React.Component {
         var i;
         for(i=0;i<diceForCurPlayer.length;i++) data += diceForCurPlayer[i];
         data += playersNonce[curAccount];
-        const hashDice = soliditySha3(data);
+        // const hashDice = soliditySha3(data);
         // sending the hashed value of dices to contract
-        contract.methods["setDice"].cacheSend( hashDice, {
-            from: curAccount
-        });
+        // contract.methods["setDice"].cacheSend( hashDice, {
+        //     from: curAccount
+        // });
         playersDice[curAccount] = diceForCurPlayer;
         playersDiceString[curAccount] = data;
 
@@ -115,7 +120,7 @@ class GameInformation extends React.Component {
 
         // using the saved `dataKey`, get the variable we're interested in
         const numPlayers = LiarsDice.numPlayers[this.state.numPlayersKey];
-        const players = LiarsDice.getAllPlayers[this.state.playersKey];
+        // const players = LiarsDice.getAllPlayers[this.state.playersKey];
         const turn = LiarsDice.turn[this.state.turnKey];
         const bidFace = LiarsDice.bidFace[this.state.bidFaceKey];
         const bidQuantity = LiarsDice.bidQuantity[this.state.bidQuantityKey];
@@ -123,52 +128,54 @@ class GameInformation extends React.Component {
         // const activePlayers = players && players.value.map((id, i) =>
         //     <p>{i<numPlayers.value && id}</p>
         // );
-
+        
         // if it exists, then we display its value
         var myDice = []
         const curRegistered = this.state.registeredPlayers[curAccount];
         if(curRegistered) myDice = this.state.playersDice[curAccount];
+        if(numPlayers) console.log("numplayers", numPlayers.value);
         if(curRegistered){
             return (
                 <div>
                     <p>You have been successfully registered.</p>
-                    <p>My Connected Account : {curAccount}</p>
-                    <p>My dices are {myDice}</p>
-                    <form>
-                        <input type={"number"} value={1} max={6} min={1}/>
-                        <input type={"number"} value={1} max={numPlayers*5} min={1}/>
+                    <p>Your Connected Account : {curAccount}</p>
+                    <p>numPlayers: {numPlayers && numPlayers.value}</p>
+                    <p>turn: {turn && turn.value}</p>
+                    <p>bidFace: {bidFace && bidFace.value}</p>
+                    <p>bidQuantity: {bidQuantity && bidQuantity.value}</p>
+                    <p>Your dices are {myDice}</p>
+                    {/* <form>
+                        <input 
+                            type={"number"} 
+                            onChange={this.handleBidInput} 
+                            value={bidFace && bidFace.value} 
+                            min={bidFace && bidFace.value}
+                            max={6}
+                        />
+                        <input 
+                            type={"number"} 
+                            onChange={this.handleBidInput} 
+                            value={bidQuantity && bidQuantity.value} 
+                            min={bidQuantity && bidQuantity.value}
+                            max={numPlayers && numPlayers.value*5}
+                        />
                         <button className={"ld-button"}>Bid</button>
-                    </form>
-                    <button className={"ld-button"}>Challenge</button>
+                    </form> */}
+                    {/* <button className={"ld-button"}>Challenge</button> */}
 
                     <h4>Your Roll</h4>
                     {/*<button className={"ld-button"} onClick={(e) => {this.reactDice.map((item, i) => {  console.log(item);  item.rollAll([i]);})}}>Roll</button>*/}
-                    <button className={"ld-button"} onClick={() => this.reactDice.rollAll([1,2,3,4,5])}>Roll</button>
+                    {/* <button className={"ld-button"} onClick={() => this.reactDice.rollAll([1,2,3,4,5])}>Roll</button> */}
                     <ReactDice
                       ref={dice => {console.log("rolll"); this.reactDice=dice}}
                       faceColor={"#ffffff"}
                         dotColor={"#000000"}
                         numDice={5}
-                        defaultRoll={2}
+                        defaultRoll={1}
 
                     />
-
-                    {/*{this.state.playersDice[curAccount].map((item, i) => {*/}
-                    {/*    return (*/}
-                    {/*      <ReactDice*/}
-                    {/*        faceColor={"#ffffff"}*/}
-                    {/*        dotColor={"#000000"}*/}
-                    {/*        numDice={1}*/}
-                    {/*        rollDone={() => {}}*/}
-                    {/*        defaultRoll={item}*/}
-                    {/*        ref={dice => this.reactDice.push(dice)}*/}
-                    {/*      />*/}
-                    {/*    )*/}
-                    {/*})}*/}
             </div>
             );
-            return <div><p>You have been successfully registered.</p><br></br><br></br>
-            <p>Your dices are {myDice}</p></div>
         }
         return (
             <div>

@@ -1,8 +1,8 @@
 import React from 'react';
 import './App.css';
 // import ReadString from "./ReadString";
-import SetString from "./SetString";
 import GameInformation from './GameInformation';
+import BidChallenge from './BidChallenge';
 
 
 class App extends React.Component {
@@ -33,7 +33,7 @@ class App extends React.Component {
           drizzle={this.props.drizzle}
           drizzleState={this.state.drizzleState}
         />
-        <SetString
+        <BidChallenge
           drizzle={this.props.drizzle}
           drizzleState={this.state.drizzleState}
         />

@@ -1,0 +1,144 @@
+import React from "react";
+
+class BidChallenge extends React.Component {
+    constructor() {
+        super();
+        this.state = {
+            id : "",
+            registeredPlayers : {},
+            formData : {
+                bidFace : 0,
+                bidQuantity : 0,
+            },
+            numPlayersKey : null,
+            curBidderKey : null,
+            turnKey : null,
+            bidFaceKey : null,
+            bidQuantityKey : null,
+        }
+        this.handleBid = this.handleBid.bind(this);
+        this.handleChallenge = this.handleChallenge.bind(this);
+        this.handleBidFaceChange = this.handleBidFaceChange.bind(this);
+        this.handleBidQuantChange = this.handleBidQuantChange.bind(this);
+    }
+
+    getInitialState = () => {
+        if(!localStorage.getItem('set')) return;
+
+        // retreiving data from local storage
+        var registeredPlayers = JSON.parse(localStorage.getItem('registeredPlayers'));
+
+        this.setState({registeredPlayers});
+    }
+
+    handleBid = (event) => {
+        event.preventDefault();
+
+        const { drizzle, drizzleState } = this.props;
+        const contract = drizzle.contracts.MyStringStore;
+
+        // let drizzle know we want to call the `set` method with `value`
+        contract.methods["makeBid"].cacheSend(this.state.bidFace, this.state.bidQuantity, {
+            from: drizzleState.accounts[0]
+        });
+
+        window.location.reload();
+    }
+
+    handleChallenge = (event) => {
+        event.preventDefault();
+
+        const { drizzle, drizzleState } = this.props;
+        const contract = drizzle.contracts.MyStringStore;
+
+        // let drizzle know we want to call the `set` method with `value`
+        contract.methods["challenge"].cacheSend({
+            from: drizzleState.accounts[0]
+        });
+
+        window.location.reload();
+    }
+
+    handleBidFaceChange (event) {
+        let y = {...this.state.formData, "bidFace" : event.target.value};
+        this.setState({formData : y});
+    }
+
+    handleBidQuantChange (event) {
+        let y = {...this.state.formData, "bidQuantity" : event.target.value};
+        this.setState({formData : y});
+    }
+
+    componentDidMount() {
+        this.getInitialState();
+        const { drizzle, drizzleState } = this.props;
+        const id =  drizzleState.accounts[0];
+
+        const contract = drizzle.contracts.LiarsDice;
+        
+        // let drizzle know we want to watch the `myString` method
+        const numPlayersKey = contract.methods["numPlayers"].cacheCall();
+        const playersKey = contract.methods["curBidder"].cacheCall();
+        const turnKey = contract.methods["turn"].cacheCall();
+        const bidFaceKey = contract.methods["bidFace"].cacheCall();
+        const bidQuantityKey = contract.methods["bidQuantity"].cacheCall();
+        // save the `dataKey` to local component state for later reference
+        this.setState({ id, numPlayersKey, playersKey, turnKey, bidFaceKey, bidQuantityKey });
+    }
+
+    render() {
+        // get the contract state from drizzleState
+        const { drizzleState } = this.props;
+        const { LiarsDice } = drizzleState.contracts;
+        const curAccount = drizzleState.accounts[0];
+        
+        const curRegistered = this.state.registeredPlayers[curAccount];
+        if(!curRegistered) return "";
+        // using the saved `dataKey`, get the variable we're interested in
+        const numPlayers = LiarsDice.numPlayers[this.state.numPlayersKey];
+        const curBidder = LiarsDice.curBidder[this.state.curBidderKey];
+        // const turn = LiarsDice.turn[this.state.turnKey];
+        const bidFace = LiarsDice.bidFace[this.state.bidFaceKey];
+        const bidQuantity = LiarsDice.bidQuantity[this.state.bidQuantityKey];
+
+        
+        // if it exists, then we display its value
+        if(numPlayers) console.log("numplayers", numPlayers.value);
+        console.log("curAccount", curAccount)
+        console.log("curBidder", curBidder)
+        if(!curBidder || curBidder !== curAccount) return "Not Your Turn";
+        return (
+            <div>
+                <form onSubmit={this.handleBid}>
+                    <div className="form-group">
+                        <label>Dice Face</label>
+                        <input 
+                            type={"number"}
+                            className="form-control"
+                            onChange={this.handleBidFaceChange}
+                            value={bidFace && bidFace.value}
+                            min={bidFace && bidFace.value}
+                            max={6}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label>Dice Quantity</label>
+                        <input 
+                            type={"number"} 
+                            onChange={this.handleBidQuantChange} 
+                            value={bidQuantity && bidQuantity.value}
+                            min={bidQuantity && bidQuantity.value}
+                            max={numPlayers && numPlayers.value*5}
+                        />
+                    </div>
+                    <button>Bid</button>
+                </form>
+                <form onSubmit={this.handleChallenge}>
+                    <button>Challenge</button>
+                </form>
+            </div>
+        );
+    }
+}
+
+export default BidChallenge;

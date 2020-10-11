@@ -11,6 +11,7 @@ contract LiarsDice {
   uint public bidFace;
   uint public bidQuantity;
   address payable public bidAddress;
+  address payable public curBidder;
 
   // The dice faces are hashed and sent to contract
   mapping(address => bytes32) private hashedDice;
@@ -25,8 +26,8 @@ contract LiarsDice {
 
   // A function 
   function registerParticipant() public payable {
-    // players[numPlayers] = new Player(msg.sender,5);
     players[numPlayers] = msg.sender;
+    if(numPlayers == 0) curBidder = msg.sender;
     numPlayers++;
   }
 
