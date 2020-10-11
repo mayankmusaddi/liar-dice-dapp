@@ -10,6 +10,7 @@ class GameInformation extends React.Component {
     this.state = {
       id: "",
       registeredPlayers: {},
+      hasRevealed : {},
       playersDice: {},
       playersDiceString: {},
       playersNonce: {},
@@ -33,9 +34,13 @@ class GameInformation extends React.Component {
     var registeredPlayers = JSON.parse(
       localStorage.getItem("registeredPlayers")
     );
+    var hasRevealed = JSON.parse(
+        localStorage.getItem("hasRevealed")
+      );
 
     this.setState({
       registeredPlayers,
+      hasRevealed,
       playersDice,
       playersNonce,
     });
@@ -57,6 +62,8 @@ class GameInformation extends React.Component {
     // registering the player
     let registeredPlayers = this.state.registeredPlayers;
     registeredPlayers[curAccount] = true;
+    let hasRevealed = this.state.hasRevealed;
+    hasRevealed[curAccount] = false;
     let playersNonce = this.state.playersNonce;
     playersNonce[curAccount] = 197; // needs to be changed to random
 
@@ -81,6 +88,7 @@ class GameInformation extends React.Component {
     // setting items in local storage
     localStorage.setItem("playersDice", JSON.stringify(playersDice));
     localStorage.setItem("playersNonce", JSON.stringify(playersNonce));
+    localStorage.setItem("hasRevealed", JSON.stringify(hasRevealed));
     localStorage.setItem(
       "registeredPlayers",
       JSON.stringify(registeredPlayers)
@@ -90,6 +98,7 @@ class GameInformation extends React.Component {
     // setting the state for the current changes
     this.setState({
       registeredPlayers,
+      hasRevealed,
       playersDice,
       playersNonce,
     });
