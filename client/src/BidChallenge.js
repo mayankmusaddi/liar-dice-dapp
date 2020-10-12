@@ -8,6 +8,7 @@ class BidChallenge extends React.Component {
     this.state = {
       id: "",
       registeredPlayers: {},
+      playersLost : {},
       isRolled : {},
       hasRevealed: {},
       formData: {
@@ -28,6 +29,7 @@ class BidChallenge extends React.Component {
     this.handleBid = this.handleBid.bind(this);
     this.handleReveal = this.handleReveal.bind(this);
     this.handleChallenge = this.handleChallenge.bind(this);
+    this.handleClaim = this.handleClaim.bind(this);
     this.handleBidFaceChange = this.handleBidFaceChange.bind(this);
     this.handleBidQuantChange = this.handleBidQuantChange.bind(this);
   }
@@ -71,6 +73,18 @@ class BidChallenge extends React.Component {
 
     // let drizzle know we want to call the `set` method with `value`
     contract.methods["initiateChallenge"].cacheSend({
+      from: drizzleState.accounts[0],
+    });
+  };
+
+  handleClaim = (event) => {
+    event.preventDefault();
+
+    const { drizzle, drizzleState } = this.props;
+    const contract = drizzle.contracts.LiarsDice;
+
+    // let drizzle know we want to call the `set` method with `value`
+    contract.methods["claimReward"].cacheSend({
       from: drizzleState.accounts[0],
     });
   };
@@ -196,6 +210,9 @@ class BidChallenge extends React.Component {
               There were {quantity && quantity.value} dices of Face{" "}
               {bidFace && bidFace.value}
             </p>
+            {/* <form onSubmit={this.handleClaim}>
+                <LDButton title={"Claim your Reward"} titleStyle={{fontWeight: "bold", width: "350px", padding: 10}}/>
+            </form> */}
           </div>
         );
       }
@@ -219,7 +236,7 @@ class BidChallenge extends React.Component {
             {prevPlayer}
           </p>
           <form onSubmit={this.handleReveal}>
-            <button>Reveal</button>
+            <LDButton title={"Reveal"} titleStyle={{fontWeight: "bold", width: "350px", padding: 10}}/>
           </form>
         </div>
       );

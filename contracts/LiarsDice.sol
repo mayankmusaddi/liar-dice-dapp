@@ -37,8 +37,10 @@ contract LiarsDice {
     uint256 public challengeState;
     uint256 public revealLeft;
     address payable public winner;
+    address payable public loser;
     uint256 public winnerIndex;
     uint256 public quantity;
+    bytes32 private baseHash;
 
     // A constructor taking in the bidding time and revealing time as parameters
     /** constructor for contract. 
@@ -49,6 +51,7 @@ contract LiarsDice {
         bidFace = 0;
         bidQuantity = 0;
         numPlayers = 0;
+        baseHash = 0;
         faceNumber = [0, 0, 0, 0, 0, 0, 0];
     }
 
@@ -110,15 +113,40 @@ contract LiarsDice {
         }
     }
 
-    function checkWin() public {
+    function checkWin() public payable {
         quantity = faceNumber[bidFace];
         if (quantity >= bidQuantity) {
             winner = bidAddress;
+            loser = challenger;
             winnerIndex = (turn == 0) ? numPlayers : turn;
         } else {
             winner = challenger;
+            loser = bidAddress;
             winnerIndex = (turn + 1);
         }
+        winner.transfer(4e18);
+    }
+
+    function claimReward() public payable{
+        winner.transfer(4e18);
+
+        // require(hashedDice[msg.sender] != baseHash, "kitni baar claim karega");
+        // hashedDice[msg.sender] = baseHash;
+        // numPlayers--;
+        // if(numPlayers == 0){
+        //     turn = 0;
+        //     bidFace = 0;
+        //     bidQuantity = 0;
+        //     faceNumber = [0, 0, 0, 0, 0, 0, 0];
+        // }
+        // address payable toSend = msg.sender;
+        // // require(msg.sender != loser, "You lost, you will not receive even a single penny !");
+        // if(msg.sender == winner){
+        //     toSend.transfer(4e18);
+        // }
+        // else{
+        //     toSend.transfer(2e18);
+        // }
     }
 
     /** Function of Solidity. 
